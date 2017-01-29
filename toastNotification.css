@@ -1,0 +1,16 @@
+.toast-div {
+	width: 500px;
+	color:white;
+	animation-name: example;
+    animation-duration: 4s;	 
+    opacity: 0;
+    z-index: 10;
+    border: 2px solid red;
+    position:absolute;
+    top: 50%;
+    left:50%;
+}
+
+@keyframes example {
+    50% {opacity: 1}
+}
