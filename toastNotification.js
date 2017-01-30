@@ -1,49 +1,57 @@
-var createToastNotification;
-(function(){
-	createToastNotification = function(toastNotificationElementId, toastMessage, notificationType, timer){
-		var element = document.getElementById(toastNotificationElementId);
-		element.style.display = 'block';
-		
-		element.innerHTML = '';
-		if (element.hasChildNodes()){
-			element.removeChild();
-		}
-		var toastDiv = createElement('div', toastMessage, {
-			'id':'toast-div-id',
-			'class' : 'toast-div'
-		});
+toast = {};
+toast.options = {};
 
-		var bgColor = 'green';
-		switch(notificationType){
-			case 'error': 
-						bgColor = 'red';
-						break;
-			case 'warning': 
-						bgColor = 'yellow';
-		}
+toast.show = function(options){
+	toast.options = options;
+	toast.createToastNotification(options.elementId, options.message, options.notificatonType, options.timer)
+}
 
-		toastDiv.style.animationDuration = timer;
-		toastDiv.style.backgroundColor  = bgColor;
-		element.append(toastDiv);
 
-		setTimeout(function(){
-			element.style.display = 'none';
-		}, timer)
+toast.createToastNotification = function(toastNotificationElementId, toastMessage, notificationType, timer){
+	var element = document.getElementById(toastNotificationElementId);
+	element.style.display = 'block';
+
+	element.innerHTML = '';
+	if (element.hasChildNodes()){
+		element.removeChild();
+	}
+	var toastDiv = toast.createElement('div', toastMessage, {
+		'id':'toast-div-id',
+		'class' : toast.options.class
+	});
+                               
+	var bgColor = 'green';
+	switch(notificationType){
+		case 'error': 
+					bgColor = 'red';
+					break;
+		case 'warning': 
+					bgColor = 'yellow';
+		default:
+					bgColor = 'green';
 	}
 
-	function createElement(element,content, attrs){
-		var newElement = document.createElement(element);
-		if (content){
-			var t = document.createTextNode(content);
-			newElement.appendChild(t);
-		}
-		setAttributes(newElement, attrs);
-		return newElement
-	}
+	toastDiv.style.animationDuration = timer / 1000 + "s";
+	toastDiv.style.backgroundColor  = bgColor;
+	element.append(toastDiv);
 
-	function setAttributes(element, attrs){
-		for(var key in attrs){
-			element.setAttribute(key, attrs[key]);
-		}
+	setTimeout(function(){
+		element.style.display = 'none';
+	}, timer)
+}
+
+toast.createElement = function (element,content, attrs){
+	var newElement = document.createElement(element);
+	if (content){
+		var t = document.createTextNode(content);
+		newElement.appendChild(t);
 	}
-})()
+	toast.setAttributes(newElement, attrs);
+	return newElement
+}
+
+toast.setAttributes = function (element, attrs){
+	for(var key in attrs){
+		element.setAttribute(key, attrs[key]);
+	}
+}
