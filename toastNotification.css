@@ -1,14 +1,24 @@
 .toast-div {
-	width: 500px;
-	color:white;
+    width:300px;
 	animation-name: example;
-    animation-duration: 4s;	 
-    opacity: 0;
     z-index: 10;
-    border: 2px solid red;
     position:absolute;
     top: 50%;
     left:50%;
+    opacity: 0;
+    overflow: hidden;
+    box-shadow: 0 0 12px #999;
+    color: #fff;
+    padding: 15px 15px 15px 50px;
+    border-radius: 3px;
+    position: fixed;
+    z-index: 999999;
+    font-size: 14px;
+    line-height: 20px;
+    box-sizing: border-box;
+    font-family: "Helvetica Neue,Helvetica,Arial,sans-serif";
+    font-size: 14px;
+    line-height: 20px
 }
 
 @keyframes example {
